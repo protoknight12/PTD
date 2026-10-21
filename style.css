@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    background:
+        radial-gradient(ellipse at 10% 10%, rgba(99, 57, 164, 0.55), transparent 45%),
+        radial-gradient(ellipse at 90% 15%, rgba(42, 76, 145, 0.45), transparent 45%),
+        radial-gradient(ellipse at 75% 90%, rgba(135, 47, 103, 0.35), transparent 50%),
+        linear-gradient(135deg, #100e1b, #17152b 45%, #101725 75%, #1b1020);
+    background-attachment: fixed;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 8%;
+}
+
+.logo {
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #b7a0ff;
+}
+
+.nav-text {
+    color: #c0bbd2;
+    font-size: 13px;
+}
+
+.container {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.signup-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 40px;
+    background: rgba(20, 18, 34, 0.72);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(206, 190, 255, 0.17);
+    border-radius: 22px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #b9b4ca;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #eeeaf8;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 15px;
+    background: rgba(10, 9, 20, 0.55);
+    border: 1px solid rgba(193, 177, 229, 0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s,
+                background 0.25s;
+}
+
+.form-group input::placeholder {
+    color: #817b96;
+}
+
+.form-group input:focus {
+    border-color: #b49aff;
+    background: rgba(22, 18, 40, 0.85);
+    box-shadow: 0 0 0 4px rgba(163, 126, 255, 0.12);
+}
+
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 8px 0 24px;
+}
+
+.terms input {
+    margin-top: 3px;
+    accent-color: #b49aff;
+    flex-shrink: 0;
+}
+
+.terms label {
+    color: #b9b4ca;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    background: linear-gradient(110deg, #a78bfa, #c4a5ff 50%, #9b9aff);
+    color: #171124;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s,
+                filter 0.25s;
+}
+
+.signup-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.25);
+    filter: brightness(1.08);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 27px 0;
+    color: #918aa8;
+    font-size: 11px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(193, 177, 229, 0.18);
+}
+
+.login-text {
+    text-align: center;
+    color: #b9b4ca;
+    font-size: 13px;
+}
+
+.login-text a {
+    color: #c1aaff;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 4px;
+    transition: color 0.2s;
+}
+
+.login-text a:hover {
+    color: #e0d3ff;
+    text-decoration: underline;
+}
+
+footer {
+    margin-top: 30px;
+    padding-bottom: 10px;
+    text-align: center;
+    color: #9b95ae;
+    font-size: 11px;
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 22px 5%;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .signup-card {
+        padding: 28px 22px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
