@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Movies, Books &amp; Music Reviews{% endblock %}
+
+{% macro poster(item, cls="") -%}
+    <div class="poster {{ cls }}" style="--c1: {{ item.color1 }}; --c2: {{ item.color2 }};">
+        <span>{{ item.title }}</span>
+    </div>
+{%- endmacro %}
+
+{% block body %}
+    <header class="navbar">
+        <a href="{{ url_for('index') }}" class="logo">Critique</a>
+
+        <nav class="nav-links">
+            <a href="#movies">Movies</a>
+            <a href="#books">Books</a>
+            <a href="#music">Music</a>
+            <a href="#reviews">Reviews</a>
+        </nav>
+
+        <form class="search" action="#" role="search">
+            <label for="search" class="sr-only">Search</label>
+            <input
+                type="search"
+                id="search"
+                name="q"
+                placeholder="Search titles, artists, authors"
+            >
+        </form>
+
+        <div class="nav-actions">
+            {% if session.user %}
+            <span class="nav-user">{{ session.user.name }}</span>
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit" class="nav-login">Log out</button>
+            </form>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="nav-login">Log in</a>
+            <a href="{{ url_for('signup') }}" class="button small">Sign up</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="home">
+        {% if featured %}
+        <section class="hero">
+            {{ poster(featured, "hero-poster") }}
+
+            <div>
+                <span class="kicker">Pick of the week</span>
+                <h1>{{ featured.title }}</h1>
+                <p class="meta">
+                    {{ TYPE_LABELS[featured.type] }} · {{ featured.year }} · {{ featured.genre }} · {{ featured.creator }}
+                </p>
+                <p class="description">{{ featured.description }}</p>
+
+                <div class="hero-rating">
+                    <span class="score">{{ featured.rating }}</span>
+                    <span class="stars" aria-label="{{ featured.rating }} out of 5 stars">{{ featured.rating | stars }}</span>
+                    <span>{{ featured.rating_count | compact }} ratings</span>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#" class="button">Write a review</a>
+                    <a href="#" class="button ghost">Add to watchlist</a>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        {% for id, heading, items in rows %}
+        <section class="row" id="{{ id }}">
+            <div class="row-head">
+                <h2>{{ heading }}</h2>
+                <a href="#">See all</a>
+            </div>
+            <div class="cards">
+                {% for item in items %}
+                <article class="card">
+                    {{ poster(item, "square" if item.type == "music") }}
+                    <h3>{{ item.title }}</h3>
+                    <p class="card-meta">{{ item.creator }}, {{ item.year }}</p>
+                    <p class="rating"><span class="stars">★</span> {{ item.rating }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+
+        <section class="row" id="reviews">
+            <div class="row-head">
+                <h2>Latest Reviews</h2>
+                <a href="#">See all</a>
+            </div>
+            <div class="reviews">
+                {% for review in reviews %}
+                <article>
+                    <p class="review-body">“{{ review.body }}”</p>
+                    <p class="review-by">
+                        <strong>{{ review.name }}</strong> on <em>{{ review.title }}</em> ({{ TYPE_LABELS[review.type] | lower }})
+                        <span class="stars" aria-label="{{ review.rating }} out of 5 stars">{{ review.rating | stars }}</span>
+                    </p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Critique</p>
+        </footer>
+    </main>
+{% endblock %}

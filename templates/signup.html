@@ -1,34 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Critique</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block body %}
     <header class="navbar">
-        <a href="signup.html" class="logo">Critique<span>.</span></a>
+        <a href="{{ url_for('index') }}" class="logo">Critique</a>
         <p class="nav-text">Your world of stories, sounds and cinema.</p>
     </header>
 
     <main class="container">
-        <section class="signup-card">
+        <section class="auth-card">
             <h1>Create your account</h1>
 
             <p class="subtitle">
                 Discover, explore and review movies, music and books.
             </p>
 
-            <form action="#" method="post">
+            {% if error %}
+            <p class="form-error" role="alert">{{ error }}</p>
+            {% endif %}
+
+            <form action="{{ url_for('signup') }}" method="post">
                 <div class="form-group">
                     <label for="name">Full name</label>
                     <input
                         type="text"
                         id="name"
                         name="name"
+                        value="{{ form.name }}"
                         placeholder="Enter your full name"
                         autocomplete="name"
+                        maxlength="100"
                         required
                     >
                 </div>
@@ -39,6 +41,7 @@
                         type="email"
                         id="email"
                         name="email"
+                        value="{{ form.email }}"
                         placeholder="you@example.com"
                         autocomplete="email"
                         required
@@ -53,6 +56,7 @@
                         name="password"
                         placeholder="Create a password"
                         autocomplete="new-password"
+                        minlength="8"
                         required
                     >
                 </div>
@@ -64,24 +68,19 @@
                     </label>
                 </div>
 
-                <button type="submit" class="signup-button">
-                    Create Account
+                <button type="submit" class="button full">
+                    Create account
                 </button>
             </form>
 
-            <div class="divider">
-                <span>OR</span>
-            </div>
-
             <p class="login-text">
                 Already have an account?
-                <a href="login.html">Log in</a>
+                <a href="{{ url_for('login') }}">Log in</a>
             </p>
         </section>
 
         <footer>
-            <p>© 2026 Critique. Made for entertaiment analysis.</p>
+            <p>© 2026 Critique</p>
         </footer>
     </main>
-</body>
-</html>
+{% endblock %}
